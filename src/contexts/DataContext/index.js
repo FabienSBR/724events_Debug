@@ -11,10 +11,22 @@ const DataContext = createContext({});
 
 export const api = {
   loadData: async () => {
-    const json = await fetch(`${process.env.PUBLIC_URL}/events.json`);
-    return json.json();
-  },
-};
+  const json = await fetch(`${process.env.PUBLIC_URL}/events.json`);
+  const data = await json.json();
+
+  const updateImagePaths = (items) =>
+    items.map((item) => ({
+      ...item,
+      cover: `${process.env.PUBLIC_URL}${item.cover}`,
+    }));
+
+  return {
+    ...data,
+    events: updateImagePaths(data.events),
+    focus: updateImagePaths(data.focus),
+  };
+},
+
 
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
