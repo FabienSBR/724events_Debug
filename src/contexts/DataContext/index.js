@@ -25,8 +25,8 @@ export const api = {
     events: updateImagePaths(data.events),
     focus: updateImagePaths(data.focus),
   };
-},
-
+ },
+};
 
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
